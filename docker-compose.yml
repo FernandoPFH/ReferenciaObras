@@ -17,13 +17,14 @@ services:
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
+      MYSQL_USER: fernando
+      MYSQL_PASSWORD: fernando
+      MYSQL_DATABASE: data.db
 
   db-management:
     image: adminer
-    restart: always
     ports:
       - 8080:8080
 
@@ -39,7 +40,7 @@ services:
     build: ./Server/roadduser/
     depends_on:
       - rabbitmq-server
-      - mysqlsrv-users
+      - db
     tty: true
     volumes:
       - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
@@ -48,7 +49,7 @@ services:
     build: ./Server/rocheckuser
     depends_on:
       - rabbitmq-server
-      - mysqlsrv-users
+      - db
     tty: true
     volumes:
       - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
@@ -57,7 +58,7 @@ services:
     build: ./Server/rosetobras
     depends_on:
       - rabbitmq-server
-      - mysqlsrv-obras
+      - db
     tty: true
     volumes:
       - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
@@ -66,7 +67,7 @@ services:
     build: ./Server/rogetobras
     depends_on:
       - rabbitmq-server
-      - mysqlsrv-obras
+      - db
     tty: true
     volumes:
       - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
@@ -75,7 +76,7 @@ services:
     build: ./Server/rosetreferencia
     depends_on:
       - rabbitmq-server
-      - mysqlsrv-referencias
+      - db
     tty: true
     volumes:
       - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
@@ -84,7 +85,7 @@ services:
     build: ./Server/rogetreferencia
     depends_on:
       - rabbitmq-server
-      - mysqlsrv-referencias
+      - db
     tty: true
     volumes:
       - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
