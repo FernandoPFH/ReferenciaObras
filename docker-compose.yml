@@ -1,0 +1,95 @@
+version: '3.3'
+services:
+  rabbitmq-server:
+    image: rabbitmq:3.8.1
+    hostname: "rabbitmq-server"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq-server"
+      
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  db-management:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  roapigateway:
+    build: ./Server/roapigateway/
+    depends_on:
+      - rabbitmq-server
+    tty: true
+    ports:
+      - "5000:5000"
+
+  roadduser:
+    build: ./Server/roadduser/
+    depends_on:
+      - rabbitmq-server
+      - mysqlsrv-users
+    tty: true
+    volumes:
+      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
+
+  rocheckuser:
+    build: ./Server/rocheckuser
+    depends_on:
+      - rabbitmq-server
+      - mysqlsrv-users
+    tty: true
+    volumes:
+      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
+      
+  rosetobras:
+    build: ./Server/rosetobras
+    depends_on:
+      - rabbitmq-server
+      - mysqlsrv-obras
+    tty: true
+    volumes:
+      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
+
+  rogetobras:
+    build: ./Server/rogetobras
+    depends_on:
+      - rabbitmq-server
+      - mysqlsrv-obras
+    tty: true
+    volumes:
+      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
+      
+  rosetreferencia:
+    build: ./Server/rosetreferencia
+    depends_on:
+      - rabbitmq-server
+      - mysqlsrv-referencias
+    tty: true
+    volumes:
+      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
+
+  rogetreferencia:
+    build: ./Server/rogetreferencia
+    depends_on:
+      - rabbitmq-server
+      - mysqlsrv-referencias
+    tty: true
+    volumes:
+      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
+
+volumes:
+  mysqlsrv-users:
+  mysqlsrv-obras:
+  mysqlsrv-referencias:
