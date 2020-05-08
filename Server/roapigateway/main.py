@@ -30,6 +30,7 @@ def login():
 		User = {"user": request.form['user'], "password": request.form['password']}
 		mensagem = Mensagem(queue="trylogin")
 		response = mensagem.call(mensagem="trylogin")
+        #TODO mexer linha de cima
 		if response["boo"] == True:
 			return response["code"]
 		elif response["boo"] == False:

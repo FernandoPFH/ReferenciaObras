@@ -22,6 +22,8 @@ services:
       MYSQL_USER: fernando
       MYSQL_PASSWORD: fernando
       MYSQL_DATABASE: data.db
+    volumes:
+      - ./Database
 
   db-management:
     image: adminer
@@ -42,8 +44,6 @@ services:
       - rabbitmq-server
       - db
     tty: true
-    volumes:
-      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
 
   rocheckuser:
     build: ./Server/rocheckuser
@@ -51,8 +51,6 @@ services:
       - rabbitmq-server
       - db
     tty: true
-    volumes:
-      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
       
   rosetobras:
     build: ./Server/rosetobras
@@ -60,8 +58,6 @@ services:
       - rabbitmq-server
       - db
     tty: true
-    volumes:
-      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
 
   rogetobras:
     build: ./Server/rogetobras
@@ -69,8 +65,6 @@ services:
       - rabbitmq-server
       - db
     tty: true
-    volumes:
-      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
       
   rosetreferencia:
     build: ./Server/rosetreferencia
@@ -78,8 +72,6 @@ services:
       - rabbitmq-server
       - db
     tty: true
-    volumes:
-      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
 
   rogetreferencia:
     build: ./Server/rogetreferencia
@@ -87,10 +79,3 @@ services:
       - rabbitmq-server
       - db
     tty: true
-    volumes:
-      - "/home/fernando/Desktop/Documentos/Real/HelpingHand/DataBase:/DB"
-
-volumes:
-  mysqlsrv-users:
-  mysqlsrv-obras:
-  mysqlsrv-referencias:

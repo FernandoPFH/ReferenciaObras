@@ -15,7 +15,7 @@ channel.queue_declare(queue="getobras")
 def on_request(ch, method, properties, body):
 	while True:
 		try:
-			mydb = mysql.connector.connect(host="mysqlsrv-obras", user="guest", passwd="guest", database="obras.db")
+			mydb = mysql.connector.connect(host="mysqlsrv-obras", user="guest", passwd="guest", database="data.db")
 			break
 		except:
 			time.sleep(5)

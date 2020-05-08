@@ -15,7 +15,7 @@ channel.queue_declare(queue="setreferencia")
 def on_request(ch, method, properties, body):
 	while True:
 		try:
-			mydb = mysql.connector.connect(host="mysqlsrv-referencias", user="guest", passwd="guest", database="referencias.db")
+			mydb = mysql.connector.connect(host="mysqlsrv-referencias", user="guest", passwd="guest", database="data.db")
 			break
 		except:
 			time.sleep(5)
