@@ -20,12 +20,10 @@ def on_request(ch, method, properties, body):
 		except:
 			time.sleep(5)
 
-	print(body)
 	ref = body.decode("utf-8").split("!!@!!")
 	num = len(ref) / 3
 
-	#try:
-	if True:
+	try:
 		for i in range(0,int(num)):
 			mycursor = mydb.cursor()
 			comand = "UPDATE Referencia SET Preco = %s WHERE Nome = %s"
@@ -37,8 +35,8 @@ def on_request(ch, method, properties, body):
 			mydb.commit()
 
 		resposta = "True"
-	#except:
-	#	resposta = "False"
+	except:
+		resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)
