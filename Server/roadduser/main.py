@@ -29,7 +29,8 @@ def on_request(ch, method, properties, body):
 
 	resposta ="False"
 
-	try:
+	#try:
+	if True:
 		mycursor.execute(comand, user)
 		myresult = mycursor.fetchall()
 
@@ -57,7 +58,7 @@ def on_request(ch, method, properties, body):
 					resposta = "True"
 			else:
 				resposta = "False"
-	except:
+	#except:
 		resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
