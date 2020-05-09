@@ -92,10 +92,10 @@ def referencia():
 	elif request.method == 'POST':
 		dados = request.args.get('referencia')
 		mensagem = Mensagem(queue="setreferencia")
-		response = mensagem.call(mensagem=dados).split("!@!")
-		if response[0] == True:
+		response = mensagem.call(mensagem=dados)
+		if response == "True":
 			return "Referencia mudada com sucesso"
-		elif response[0] == False:
+		elif response == "False":
 			return "Erro ao tentar mudar referencia"
 
 if __name__ == '__main__':

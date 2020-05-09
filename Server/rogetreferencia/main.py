@@ -28,7 +28,6 @@ def on_request(ch, method, properties, body):
 		mycursor.execute(comand)
 		myresult = mycursor.fetchall()
 
-		print(myresult)
 		answer = ""
 
 		for linha in myresult:
