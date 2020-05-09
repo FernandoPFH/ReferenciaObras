@@ -34,7 +34,7 @@ def login():
 	if request.method == 'GET':
 		User = {"user": request.args.get('user'), "password": request.args.get('password')}
 		mensagem = Mensagem(queue="trylogin")
-		response = mensagem.call(mensagem=User)
+		response = mensagem.call(mensagem=User['user'])
 		if response["boo"] == True:
 			#return response["code"]
 			return "Login bem sucedido"
