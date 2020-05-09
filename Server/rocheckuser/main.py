@@ -20,7 +20,7 @@ def on_request(ch, method, properties, body):
 			time.sleep(5)
 
 	mycursor = mydb.cursor()
-
+	print(body)
 	comand = "SELECT * FROM 'Users' WHERE 'User' =%s"
 	user = (body["user"],)
 
