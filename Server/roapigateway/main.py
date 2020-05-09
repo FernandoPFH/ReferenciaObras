@@ -32,7 +32,7 @@ def main_page():
 def login():
 	if request.method == 'GET':
 		try:
-			print(request.form['user'])
+			print(request.args.get('user')])
 			print("Deu certo")
 		except:
 			print("Deu errado")
