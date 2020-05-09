@@ -59,7 +59,7 @@ def on_request(ch, method, properties, body):
 			else:
 				resposta = "False"
 	#except:
-		resposta = "False"
+	#	resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)
