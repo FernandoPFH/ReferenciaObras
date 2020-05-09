@@ -28,12 +28,6 @@ def on_request(ch, method, properties, body):
 	mycursor.execute(comand, user)
 	myresult = mycursor.fetchall()
 
-
-	for linha in myresult:
-		print(linha[1].decode("utf-8"))
-			if linha[1].decode("utf-8") == Body[1]:
-				resposta = "True!@!QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"
-
 	try:
 		mycursor.execute(comand, user)
 		myresult = mycursor.fetchall()
@@ -43,6 +37,7 @@ def on_request(ch, method, properties, body):
 				resposta = "True!@!QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"
 				break
 			else:
+				print("Negado")
 				resposta = "False"
 	except:
 		resposta = "False"
