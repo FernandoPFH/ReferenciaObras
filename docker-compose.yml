@@ -11,13 +11,6 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
-      
-  docekr-swam-visualizer:
-    image: dockersamples/visualizer:stable
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    ports:
-      - "5050:8080"
 
   db:
     image: mysql:8.0.20
