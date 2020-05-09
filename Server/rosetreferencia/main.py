@@ -20,16 +20,16 @@ def on_request(ch, method, properties, body):
 		except:
 			time.sleep(5)
 
+	print(body)
 	ref = body.decode("utf-8").split("!!@!!")
 	num = len(ref) / 3
 
 	#try:
 	if True:
 		for i in range(0,int(num)):
-			print(type(ref[3*i]))
 			mycursor = mydb.cursor()
-			comand = "UPDATE Referencia SET (Preco,Tempo) = (%s,%s) WHERE Nome = %s"
-			val = (float(ref[3*i+1]),int(ref[3*i+2]),ref[3*i])
+			comand = "UPDATE Referencia SET Preco = %s WHERE Nome = %s"
+			val = (float(ref[3*i+1]),ref[3*i])
 			mycursor.execute(comand,val)
 			mydb.commit()
 
