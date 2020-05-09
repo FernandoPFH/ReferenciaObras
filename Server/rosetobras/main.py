@@ -41,7 +41,7 @@ def on_request(ch, method, properties, body):
 		if True:
 			mycursor = mydb.cursor()
 			comand = "INSERT INTO Obras (Nome, Info) VALUES (%s, %s)"
-			val = (Obra["Nome"],json.dumbs(Obra["Info"]))
+			val = (Obra["Nome"],json.dumps(Obra["Info"]))
 			mycursor.execute(comand,val)
 			mydb.commit()
 			resposta = "True"+ "!@!" +"adicionar" 
