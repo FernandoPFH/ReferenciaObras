@@ -24,7 +24,7 @@ class Mensagem:
 			self.connection.process_data_events()
 		return self.response
 
-@app.route('/',methods = ['POST'])
+@app.route('/',methods = ['GET'])
 def main_page():
 	return 'Hello!!!'
 
@@ -35,6 +35,7 @@ def login():
 		mensagem = Mensagem(queue="trylogin")
 		response = mensagem.call(mensagem="trylogin")
         #TODO mexer linha de cima
+		print("%s,%s",%(User['user'],User['password']))
 		if response["boo"] == True:
 			#return response["code"]
 			return "<html><body><Text>Login bem sucedido</Text></body></html>"
