@@ -30,8 +30,8 @@ def main_page():
 
 @app.route('/login/',methods = ['POST', 'GET'])
 def login():
-	print("1")
 	if request.method == 'GET':
+		print("1")
 		User = {"user": request.form['user'], "password": request.form['password']}
 		mensagem = Mensagem(queue="trylogin")
 		response = mensagem.call(mensagem="trylogin")
@@ -54,6 +54,8 @@ def login():
 			return "Novo usuario registrado com sucesso"
 		elif response["boo"] == False:
 			return "Erro ao registrar novo usuario"
+	
+	return "Nenhum IF funcionou"
 
 @app.route('/QS2BP7G39nzhdu4suPdy8cGkPVymvxzr/obras/', methods = ['POST', 'GET'])
 def obras():
