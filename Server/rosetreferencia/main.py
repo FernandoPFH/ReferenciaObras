@@ -26,9 +26,10 @@ def on_request(ch, method, properties, body):
 	#try:
 	if True:
 		for i in range(0,int(num)):
+			print(type(ref[3*i]))
 			mycursor = mydb.cursor()
 			comand = "UPDATE Referencia SET (Preco,Tempo) = (%s,%s) WHERE Nome = %s"
-			val = (ref[3*i+1],ref[3*i+2],ref[3*i])
+			val = (float(ref[3*i+1])int(ref[3*i+2]),ref[3*i])
 			mycursor.execute(comand,val)
 			mydb.commit()
 
