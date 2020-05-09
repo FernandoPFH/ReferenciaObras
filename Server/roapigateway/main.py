@@ -30,6 +30,7 @@ def main_page():
 
 @app.route('/login/',methods = ['POST', 'GET'])
 def login():
+	print("1")
 	if request.method == 'GET':
 		User = {"user": request.form['user'], "password": request.form['password']}
 		mensagem = Mensagem(queue="trylogin")
