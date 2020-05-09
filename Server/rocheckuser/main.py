@@ -22,7 +22,7 @@ def on_request(ch, method, properties, body):
 
 	mycursor = mydb.cursor()
 	comand = "SELECT * FROM 'Users' WHERE 'User' =%s"
-	Body = body.body.decode("utf-8").split("!@!")
+	Body = body.decode("utf-8").split("!@!")
 	user = (Body[0],)
 
 	try:
