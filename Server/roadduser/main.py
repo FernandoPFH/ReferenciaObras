@@ -27,18 +27,14 @@ def on_request(ch, method, properties, body):
 	comand = "SELECT * FROM Users WHERE User =%s"
 	user = (Body[0],)
 
-	resposta ="False"
-
-	#try:
-	if True:
+	try:
 		mycursor.execute(comand, user)
 		myresult = mycursor.fetchall()
 
 		for linha in myresult:
 			if linha[0].decode("utf-8") == Body[0] and linha[1].decode("utf-8") == Body[1]:
 				newuser = (Body[2],)
-				#try:
-				if True:
+				try:
 					mycursor.execute(comand, newuser)
 					myresult1 = mycursor.fetchall()
 					for linha1 in myresult1:
@@ -51,16 +47,22 @@ def on_request(ch, method, properties, body):
 							mycursor.execute(comand_insert,input_)
 							mydb.commit()
 							resposta = "True"
-				#except:
-				#	comand_insert = "INSERT INTO Users (User, Password) VALUES (%s, %s)"
-				#	input_ = (Body[2],Body[3])
-				#	mycursor.execute(comand_insert,input_)
-				#	mydb.commit()
-				#	resposta = "True"
+
+					comand_insert = "INSERT INTO Users (User, Password) VALUES (%s, %s)"
+					input_ = (Body[2],Body[3])
+					mycursor.execute(comand_insert,input_)
+					mydb.commit()
+					resposta = "True"
+				except:
+					comand_insert = "INSERT INTO Users (User, Password) VALUES (%s, %s)"
+					input_ = (Body[2],Body[3])
+					mycursor.execute(comand_insert,input_)
+					mydb.commit()
+					resposta = "True"
 			else:
 				resposta = "False"
-	#except:
-	#	resposta = "False"
+	except:
+		resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)
