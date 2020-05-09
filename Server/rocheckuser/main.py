@@ -37,7 +37,6 @@ def on_request(ch, method, properties, body):
 				resposta = "True!@!QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"
 				break
 			else:
-				print("Negado")
 				resposta = "False"
 	except:
 		resposta = "False"
