@@ -22,7 +22,6 @@ class Mensagem(object):
 		self.corr_id = str(uuid.uuid4())
 		self.channel.basic_publish(exchange='',routing_key=self.queue,properties=pika.BasicProperties(reply_to=self.callback_queue,correlation_id=self.corr_id),body=mensagem)
 		while self.response is None:
-			print("Waiting response")
 			self.connection.process_data_events()
 		return self.response
 

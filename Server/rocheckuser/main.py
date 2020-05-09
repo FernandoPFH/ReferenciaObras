@@ -14,13 +14,14 @@ channel.queue_declare(queue="trylogin")
 def on_request(ch, method, properties, body):
 	while True:
 		try:
-			mydb = mysql.connector.connect(host="mysqlsrv-users", user="guest", passwd="guest", database="data.db")
+			mydb = mysql.connector.connect(host="rabbitmq-server", user="main", passwd="main", database="data.db")
 			break
 		except:
 			time.sleep(5)
 
-	mycursor = mydb.cursor()
 	print(body)
+
+	mycursor = mydb.cursor()
 	comand = "SELECT * FROM 'Users' WHERE 'User' =%s"
 	user = (body["user"],)
 
