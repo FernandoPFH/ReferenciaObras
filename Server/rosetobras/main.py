@@ -42,6 +42,7 @@ def on_request(ch, method, properties, body):
 			comand = "INSERT INTO Obras (Nome, Info) VALUES (%s, %s)"
 			val = (Obra["Nome"],Obra["Info"])
 			mycursor.execute(comand,val)
+			mydb.commit()
 			resposta = "True"+ "!@!" +"adicionar" 
 		except:
 			resposta = "False"+ "!@!" +"adicionar"
