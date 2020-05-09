@@ -14,7 +14,6 @@ channel.queue_declare(queue="trylogin")
 def on_request(ch, method, properties, body):
 	while True:
 		try:
-			print("Tentando")
 			mydb = mysql.connector.connect(host="db", user="fernando", passwd="fernando", database="data.db")
 			break
 		except:

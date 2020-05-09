@@ -46,11 +46,13 @@ def on_request(ch, method, properties, body):
 							input = (Body[2],Body[3])
 							mycursor.execute(comand_insert,input)
 							mydb.commit()
+							resposta = "True"
 				except:
 					comand_insert = "INSERT INTO users (User, Password) VALUES (%s, %s)"
 					input = (Body[2],Body[3])
 					mycursor.execute(comand_insert,input)
 					mydb.commit()
+					resposta = "True"
 			else:
 				resposta = "False"
 	except:
