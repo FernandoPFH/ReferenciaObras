@@ -31,10 +31,14 @@ def on_request(ch, method, properties, body):
 		answer = ""
 
 		for linha in myresult:
-			try:
-				answer += "!!@!!".join(linha)
-			except:
-				answer += str(linha)
+			for item in linha:
+				try:
+					answer += item
+				except:
+					answer += str(item)
+
+				if linha.index(item) != len(linha) - 1:
+					answer += "!!!@!!!"
 			
 			if myresult.index(linha) != len(myresult) - 1:
 				answer += "!!!@!!!"

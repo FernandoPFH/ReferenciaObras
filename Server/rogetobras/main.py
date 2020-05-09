@@ -25,7 +25,6 @@ def on_request(ch, method, properties, body):
 	comand = "SELECT * FROM Obras"
 
 	try:
-	if True:
 		mycursor.execute(comand)
 		myresult = mycursor.fetchall()
 
