@@ -34,8 +34,10 @@ def on_request(ch, method, properties, body):
 				resposta = "True!@!QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"
 				break
 			else:
+				print("Quase deu")
 				resposta = "False"
 	except:
+		print("Deu Errado")
 		resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
