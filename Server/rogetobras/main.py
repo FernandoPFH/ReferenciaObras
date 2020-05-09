@@ -24,7 +24,7 @@ def on_request(ch, method, properties, body):
 
 	comand = "SELECT * FROM Obras"
 
-	#try:
+	try:
 	if True:
 		mycursor.execute(comand)
 		myresult = mycursor.fetchall()
@@ -41,8 +41,8 @@ def on_request(ch, method, properties, body):
 				answer += "!!!@!!!"
 
 		resposta = "True" + "!@!" + answer
-	#except:
-	#	resposta = "False"
+	except:
+		resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)

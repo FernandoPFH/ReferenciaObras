@@ -15,7 +15,7 @@ channel.queue_declare(queue="getreferencia")
 def on_request(ch, method, properties, body):
 	while True:
 		try:
-			mydb = mysql.connector.connect(host="mysqlsrv-referencias", user="guest", passwd="guest", database="data.db")
+			mydb = mysql.connector.connect(host="db", user="fernando", passwd="fernando", database="data.db")
 			break
 		except:
 			time.sleep(5)
@@ -28,7 +28,18 @@ def on_request(ch, method, properties, body):
 		mycursor.execute(comand)
 		myresult = mycursor.fetchall()
 
-		reposta = {"boo":True, "referencia":myresult}
+		answer = ""
+
+		for linha in myresult:
+			try:
+				answer += "!!@!!".join(linha)
+			except:
+				answer += str(linha)
+			
+			if myresult.index(linha) != len(myresult) - 1:
+				answer += "!!!@!!!"
+
+		reposta = "True"+ "!@!" +answer
 	except:
 		resposta = {"boo":False}
 

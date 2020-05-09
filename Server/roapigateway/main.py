@@ -83,10 +83,10 @@ def obras():
 def referencia():
 	if request.method == 'GET':
 		mensagem = Mensagem(queue="getreferencia")
-		response = mensagem.call(mensagem="getreferencia")
-		if response["boo"] == True:
-			return response["referencia"]
-		elif response["boo"] == False:
+		response = mensagem.call(mensagem="getreferencia").slpit("!@!")
+		if response[0] == "True":
+			return response[1]
+		elif response[0] == "False":
 			return "Erro ao tentar acessar a referencia"
 
 	elif request.method == 'POST':
