@@ -28,6 +28,7 @@ def on_request(ch, method, properties, body):
 		mycursor.execute(comand)
 		myresult = mycursor.fetchall()
 
+		print(myresult)
 		answer = ""
 
 		for linha in myresult:
@@ -38,7 +39,7 @@ def on_request(ch, method, properties, body):
 					answer += str(item)
 
 				if linha.index(item) != len(linha) - 1:
-					answer += "!!!@!!!"
+					answer += "!!@!!"
 			
 			if myresult.index(linha) != len(myresult) - 1:
 				answer += "!!!@!!!"
