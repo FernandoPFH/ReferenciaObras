@@ -35,7 +35,8 @@ def login():
 		mensagem = Mensagem(queue="trylogin")
 		response = mensagem.call(mensagem="trylogin")
         #TODO mexer linha de cima
-		print("%s,%s", (User['user'],User['password']))
+		print(User['user'])
+		print(User['password'])
 		if response["boo"] == True:
 			#return response["code"]
 			return "<html><body><Text>Login bem sucedido</Text></body></html>"
