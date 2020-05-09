@@ -32,9 +32,11 @@ def login():
 		response = mensagem.call(mensagem="trylogin")
         #TODO mexer linha de cima
 		if response["boo"] == True:
-			return response["code"]
+			#return response["code"]
+			return "<html><body><Text>Login bem sucedido</Text></body></html>"
 		elif response["boo"] == False:
-			return "Login Negado"
+			#return "Login Negado"
+			return "<html><body><Text>Login Negado</Text></body></html>"
 
 	elif request.method == 'POST':
 		User = {"user": request.form['user'], "password": request.form['password']}
