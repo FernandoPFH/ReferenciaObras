@@ -21,7 +21,7 @@ def on_request(ch, method, properties, body):
 
 	mycursor = mydb.cursor()
 
-	comand = "SELECT * FROM users WHERE user =%s"
+	comand = "SELECT * FROM 'Users' WHERE 'User' =%s"
 	user = (body["user"],)
 
 	try:
