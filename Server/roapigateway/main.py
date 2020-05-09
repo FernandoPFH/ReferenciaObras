@@ -36,7 +36,7 @@ def login():
 		mensagem = Mensagem(queue="trylogin")
 		response = mensagem.call(mensagem=User).split("!@!")
 		if response[0] == "True":
-			return response.split("!@!")[1]
+			return response[1]
 		elif response[0] == "False":
 			return "Login Negado"
 
