@@ -34,11 +34,11 @@ def login():
 	if request.method == 'GET':
 		User = request.args.get('user') + "!@!" + request.args.get('password')
 		mensagem = Mensagem(queue="trylogin")
-		response = mensagem.call(mensagem=User)
-		if response["boo"] == True:
+		response = mensagem.call(mensagem=User).split("!@!")
+		if response[0] == "True":
 			#return response["code"]
 			return "Login bem sucedido"
-		elif response["boo"] == False:
+		elif response[0] == "False":
 			#return "Login Negado"
 			return "Login Negado"
 
