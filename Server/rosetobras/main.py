@@ -47,8 +47,7 @@ def on_request(ch, method, properties, body):
 		except:
 			resposta = "False"+ "!@!" +"adicionar"
 	elif Uso == "mudar":
-		#try:
-		if True:
+		try:
 			mycursor = mydb.cursor()
 			comand = "UPDATE Obras SET Nome = %s WHERE id = %s"
 			val = (Obra["Nome"],Obra["id"])
@@ -58,8 +57,8 @@ def on_request(ch, method, properties, body):
 			mycursor.execute(comand,val)
 			mydb.commit()
 			resposta = "True"+ "!@!" +"mudar" 
-		#except:
-		#	resposta = "False"+ "!@!" +"mudar" 
+		except:
+			resposta = "False"+ "!@!" +"mudar" 
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)
