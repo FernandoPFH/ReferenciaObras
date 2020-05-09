@@ -21,8 +21,8 @@ def on_request(ch, method, properties, body):
 		except:
 			time.sleep(5)
 
-	Uso = "!@!".split(body.decode("utf-8")[0])
-	Obra = json.loads("!@!".split(body.decode("utf-8"))[1])
+	Uso = body.split("!@!")[0].decode("utf-8")
+	Obra = json.loads(body.split("!@!")[1].decode("utf-8"))
 
 	if Uso == "remover":
 		try:
