@@ -21,7 +21,7 @@ def on_request(ch, method, properties, body):
 			time.sleep(5)
 
 	mycursor = mydb.cursor()
-	comand = "SELECT * FROM 'Users' WHERE 'User' =%s"
+	comand = "SELECT * FROM Users WHERE User =%s"
 	Body = body.decode("utf-8").split("!@!")
 	user = (Body[0],)
 
