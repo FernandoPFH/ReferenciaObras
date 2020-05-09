@@ -37,21 +37,20 @@ def on_request(ch, method, properties, body):
 		except:
 			resposta = "False"+ "!@!" +"remover"
 	elif Uso == "adicionar":
-		#try:
-		if True:
+		try:
 			mycursor = mydb.cursor()
 			comand = "INSERT INTO Obras (Nome, Info) VALUES (%s, %s)"
 			val = (Obra["Nome"],json.dumps(Obra["Info"]))
 			mycursor.execute(comand,val)
 			mydb.commit()
 			resposta = "True"+ "!@!" +"adicionar" 
-		#except:
-		#	resposta = "False"+ "!@!" +"adicionar"
+		except:
+			resposta = "False"+ "!@!" +"adicionar"
 	elif Uso == "mudar":
 		try:
 			mycursor = mydb.cursor()
 			comand = "UPDATE Obras SET (Nome, Info) = (%s,%s) WHERE id = %i"
-			val = (Obra["Nome"],Obra["Info"],Obra["id"])
+			val = (Obra["Nome"],json.dumps(Obra["Info"]),Obra["id"])
 			mycursor.execute(comand,val)
 			mydb.commit()
 			resposta = "True"+ "!@!" +"mudar" 
