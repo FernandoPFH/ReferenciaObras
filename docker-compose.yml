@@ -23,7 +23,7 @@ services:
       MYSQL_PASSWORD: fernando
       MYSQL_DATABASE: data.db
     volumes:
-      - ./Database
+      - "./Database:/var/lib/mysql"
 
   db-management:
     image: adminer
