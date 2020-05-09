@@ -31,19 +31,15 @@ def on_request(ch, method, properties, body):
 		answer = ""
 
 		for linha in myresult:
-			for item in linha:
-				try:
-					answer += item
-				except:
-					answer += str(item)
-
-				if linha.index(item) != len(linha) - 1:
-					answer += "!!@!!"
+			try:
+				answer += "!!@!!".join(linha)
+			except:
+				answer += str(linha)
 			
 			if myresult.index(linha) != len(myresult) - 1:
 				answer += "!!!@!!!"
 
-		resposta = "True"+ "!@!" +answer
+		resposta = "True" + "!@!" + answer
 	except:
 		resposta = "False"
 
