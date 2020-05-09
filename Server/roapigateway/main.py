@@ -3,7 +3,7 @@ from flask import Flask,request
 import json
 app = Flask(__name__)
 
-class Mensagem:
+class Mensagem(object):
 	def __init__(self, queue):
 		self.queue = queue
 		self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq-server'))
@@ -33,10 +33,7 @@ def login():
 	if request.method == 'GET':
 		User = {"user": request.args.get('user'), "password": request.args.get('password')}
 		mensagem = Mensagem(queue="trylogin")
-		response = mensagem.call(mensagem="trylogin")
-        #TODO mexer linha de cima
-		print(User['user'])
-		print(User['password'])
+		response = mensagem.call(mensagem=User)
 		if response["boo"] == True:
 			#return response["code"]
 			return "Login bem sucedido"
@@ -45,16 +42,14 @@ def login():
 			return "Login Negado"
 
 	elif request.method == 'POST':
-		User = {"user": request.form['user'], "password": request.form['password']}
-		NewUser = {"user": request.form['newuser'], "password": request.form['newpassword']}
+		User = {"user": request.args.get('user'), "password": request.args.get('password')}
+		NewUser = {"user": request.args.get('newuser'), "password": request.args.get('newpassword')}
 		mensagem = Mensagem(queue="newlogin")
 		response = mensagem.call(mensagem={"userinfo":User, "newuserinfo":NewUser})
 		if response["boo"] == True:
 			return "Novo usuario registrado com sucesso"
 		elif response["boo"] == False:
 			return "Erro ao registrar novo usuario"
-	
-	return "Nenhum IF funcionou"
 
 @app.route('/QS2BP7G39nzhdu4suPdy8cGkPVymvxzr/obras/', methods = ['POST', 'GET'])
 def obras():
@@ -67,7 +62,7 @@ def obras():
 			return "Erro ao tentar acessar as obras"
 
 	elif request.method == 'POST':
-		dados = {"uso":request.form['uso'], "obra":json.loads(request.form['obra'])}
+		dados = {"uso":request.args.get('uso'), "obra":json.loads(request.args.get('obra'))}
 		mensagem = Mensagem(queue="setobras")
 		response = mensagem.call(mensagem=dados)
 		if response["boo"] == True:
@@ -96,7 +91,7 @@ def referencia():
 			return "Erro ao tentar acessar a referencia"
 
 	elif request.method == 'POST':
-		dados = {"referencia":json.loads(request.form['referencia'])}
+		dados = {"referencia":json.loads(request.args.get('referencia'))}
 		mensagem = Mensagem(queue="setreferencia")
 		response = mensagem.call(mensagem=dados)
 		if response["boo"] == True:
