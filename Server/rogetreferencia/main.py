@@ -22,7 +22,7 @@ def on_request(ch, method, properties, body):
 
 	mycursor = mydb.cursor()
 
-	comand = "SELECT * FROM referencia"
+	comand = "SELECT * FROM Referencia"
 
 	#try:
 	if True:
