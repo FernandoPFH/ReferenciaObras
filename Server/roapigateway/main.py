@@ -31,7 +31,12 @@ def main_page():
 @app.route('/login/',methods = ['POST', 'GET'])
 def login():
 	if request.method == 'GET':
-		print("1")
+		try:
+			print(request.form['user'])
+			print("Deu certo")
+		except:
+			print("Deu errado")
+			print(type(request.form['user']))
 		User = {"user": request.form['user'], "password": request.form['password']}
 		mensagem = Mensagem(queue="trylogin")
 		response = mensagem.call(mensagem="trylogin")
