@@ -1,5 +1,6 @@
 import pika
 import time
+import json
 import mysql.connector
 
 while True:
@@ -20,36 +21,37 @@ def on_request(ch, method, properties, body):
 		except:
 			time.sleep(5)
 
-	if body["uso"] == "remover":
+	Uso = "!@!".split(body)[0].decode("utf-8")
+	Obra = json.loads("!@!".split(body)[1].decode("utf-8"))
+
+	if Uso == "remover":
 		try:
 			mycursor = mydb.cursor()
-			comand = "DELETE FROM obras WHERE id = %s"
-			val = (body["obra"]["id"],)
+			comand = "DELETE FROM Obras WHERE id = %i"
+			val = (Obra["id"],)
 			mycursor.execute(comand,val)
 			mydb.commit()
-			resposta = {"boo":True, "uso":"remover"} 
+			resposta = "True"+ "!@!" +"remover"
 		except:
-			resposta = {"boo":False, "uso":"remover"}
-	elif body["uso"] == "adicionar":
-		try:
-			#TODO adicionar obra
-			mycursor = mydb.cursor()
-			comand = ""
-			resposta = {"boo":True, "uso":"adicionar"} 
-		except:
-			resposta = {"boo":False, "uso":"adicionar"}
-	elif body["uso"] == "mudar":
+			resposta = "False"+ "!@!" +"remover"
+	elif Uso == "adicionar":
 		try:
 			mycursor = mydb.cursor()
-			comand = "UPDATE obras SET obra = %s WHERE id = %s"
-			val = (body["obra"]["obra"],body["obra"]["id"])
+			comand = "INSERT INTO Obras (Nome, Info) VALUES (%s, %s)"
+			val = (Obra["Nome"],Obra["Info"])
+			resposta = "True"+ "!@!" +"adicionar" 
+		except:
+			resposta = "False"+ "!@!" +"adicionar"
+	elif Uso == "mudar":
+		try:
+			mycursor = mydb.cursor()
+			comand = "UPDATE Obras SET (Nome, Info) = (%s,%s) WHERE id = %i"
+			val = (Obra["Nome"],Obra["Info"],Obra["id"])
 			mycursor.execute(comand,val)
 			mydb.commit()
-			mycursor = mydb.cursor()
-			comand = ""
-			resposta = {"boo":True, "uso":"mudar"} 
+			resposta = "True"+ "!@!" +"mudar" 
 		except:
-			resposta = {"boo":False, "uso":"mudar"}
+			resposta = "False"+ "!@!" +"mudar" 
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)

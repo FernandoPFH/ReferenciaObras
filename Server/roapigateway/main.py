@@ -54,29 +54,29 @@ def login():
 def obras():
 	if request.method == 'GET':
 		mensagem = Mensagem(queue="getobras")
-		response = mensagem.call(mensagem="getobras")
-		if response["boo"] == True:
-			return response["obras"]
-		elif response["boo"] == False:
+		response = mensagem.call(mensagem="getobras").split("!@!")
+		if response[0] == "True":
+			return response[1]
+		elif response[0] == "False":
 			return "Erro ao tentar acessar as obras"
 
 	elif request.method == 'POST':
-		dados = {"uso":request.args.get('uso'), "obra":json.loads(request.args.get('obra'))}
+		dados = request.args.get('uso') + "!@!" + request.args.get('obra')
 		mensagem = Mensagem(queue="setobras")
-		response = mensagem.call(mensagem=dados)
-		if response["boo"] == True:
-			if response["uso"] == "remover":
+		response = mensagem.call(mensagem=dados).split("!@!")
+		if response[0] == "True":
+			if response[1] == "remover":
 				return "Obra removida com sucesso"
-			elif response["uso"] == "adicionar":
+			elif response[1] == "adicionar":
 				return "Obra adicionada com sucesso"
-			elif response["uso"] == "mudar":
+			elif response[1] == "mudar":
 				return "Obra alterada com sucesso"
-		elif response["boo"] == False:
-			if response["uso"] == "remover":
+		elif response[0] == "False":
+			if response[1] == "remover":
 				return "Erro ao tentar remover obra"
-			elif response["uso"] == "adicionar":
+			elif response[1] == "adicionar":
 				return "Erro ao tentar adicionar obra"
-			elif response["uso"] == "mudar":
+			elif response[1] == "mudar":
 				return "Erro ao tentar alterar obra"
 
 @app.route('/QS2BP7G39nzhdu4suPdy8cGkPVymvxzr/referencia/', methods = ['POST', 'GET'])

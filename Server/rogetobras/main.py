@@ -15,22 +15,27 @@ channel.queue_declare(queue="getobras")
 def on_request(ch, method, properties, body):
 	while True:
 		try:
-			mydb = mysql.connector.connect(host="mysqlsrv-obras", user="guest", passwd="guest", database="data.db")
+			mydb = mysql.connector.connect(host="db", user="fernando", passwd="fernando", database="data.db")
 			break
 		except:
 			time.sleep(5)
 
 	mycursor = mydb.cursor()
 
-	comand = "SELECT * FROM obras"
+	comand = "SELECT * FROM Obras"
 
 	try:
 		mycursor.execute(comand)
 		myresult = mycursor.fetchall()
 
-		reposta = {"boo":True, "obras":myresult}
+		answer = ""
+
+		for linha in myresult:
+			answer += "!!@!!".join(linha) + "!!!@!!!"
+
+		reposta = "True" + "!@!" + myresult
 	except:
-		resposta = {"boo":False}
+		resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)
