@@ -31,13 +31,7 @@ def main_page():
 @app.route('/login/',methods = ['POST', 'GET'])
 def login():
 	if request.method == 'GET':
-		try:
-			print(request.args.get('user'))
-			print("Deu certo")
-		except:
-			print("Deu errado")
-			print(type(request.form['user']))
-		User = {"user": request.form['user'], "password": request.form['password']}
+		User = {"user": request.args.get('user'), "password": request.args.get('password')}
 		mensagem = Mensagem(queue="trylogin")
 		response = mensagem.call(mensagem="trylogin")
         #TODO mexer linha de cima
@@ -45,10 +39,10 @@ def login():
 		print(User['password'])
 		if response["boo"] == True:
 			#return response["code"]
-			return "<html><body><Text>Login bem sucedido</Text></body></html>"
+			return "Login bem sucedido"
 		elif response["boo"] == False:
 			#return "Login Negado"
-			return "<html><body><Text>Login Negado</Text></body></html>"
+			return "Login Negado"
 
 	elif request.method == 'POST':
 		User = {"user": request.form['user'], "password": request.form['password']}
