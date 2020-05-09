@@ -31,12 +31,12 @@ def on_request(ch, method, properties, body):
 
 		for linha in myresult:
 			if linha[2] == Body[1]:
-				resposta = {"boo": True, "code":"QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"}
+				resposta = "True!@!QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"
 				break
 			else:
-				resposta = {"boo":False}
+				resposta = "False"
 	except:
-		resposta = {"boo":False}
+		resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)
