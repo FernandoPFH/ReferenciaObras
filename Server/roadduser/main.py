@@ -37,7 +37,8 @@ def on_request(ch, method, properties, body):
 		for linha in myresult:
 			if linha[0].decode("utf-8") == Body[0] and linha[1].decode("utf-8") == Body[1]:
 				newuser = (Body[2],)
-				try:
+				#try:
+				if True:
 					mycursor.execute(comand, newuser)
 					myresult1 = mycursor.fetchall()
 					for linha1 in myresult1:
@@ -50,12 +51,12 @@ def on_request(ch, method, properties, body):
 							mycursor.execute(comand_insert,input_)
 							mydb.commit()
 							resposta = "True"
-				except:
-					comand_insert = "INSERT INTO Users (User, Password) VALUES (%s, %s)"
-					input_ = (Body[2],Body[3])
-					mycursor.execute(comand_insert,input_)
-					mydb.commit()
-					resposta = "True"
+				#except:
+				#	comand_insert = "INSERT INTO Users (User, Password) VALUES (%s, %s)"
+				#	input_ = (Body[2],Body[3])
+				#	mycursor.execute(comand_insert,input_)
+				#	mydb.commit()
+				#	resposta = "True"
 			else:
 				resposta = "False"
 	#except:
