@@ -15,44 +15,46 @@ channel.queue_declare(queue="newlogin")
 def on_request(ch, method, properties, body):
 	while True:
 		try:
-			mydb = mysql.connector.connect(host="mysqlsrv-users", user="guest", passwd="guest", database="data.db")
+			mydb = mysql.connector.connect(host="db", user="fernando", passwd="fernando", database="data.db")
 			break
 		except:
 			time.sleep(5)
 
 	mycursor = mydb.cursor()
 
-	comand = "SELECT * FROM users WHERE user =%s"
-	user = (body["userinfo"]["user"],)
+	Body = body.decode("utf-8").split("!@!")
+
+	comand = "SELECT * FROM Users WHERE User =%s"
+	user = (Body[0],)
 
 	try:
 		mycursor.execute(comand, user)
 		myresult = mycursor.fetchall()
 
 		for linha in myresult:
-			if linha[1] == body["userinfo"]["user"] and linha[2] == body["userinfo"]["password"]:
-				newuser = (body["newuserinfo"]["user"],)
+			if linha[0].decode("utf-8") == Body[0] and linha[1].decode("utf-8") == Body[1]:
+				newuser = (Body[2],)
 				try:
 					mycursor.execute(comand, newuser)
 					myresult1 = mycursor.fetchall()
 					for linha1 in myresult1:
-						if linha1[1] == body["newuserinfo"]:
-							resposta = {"boo":False}
+						if linha1[0].decode("utf-8") == Body[2]:
+							resposta = "False"
 							break
 						else:
-							comand_insert = "INSERT INTO users (user, password) VALUES (%s, %s)"
-							input = (body["newuserinfo"]["user"],body["newuserinfo"]["password"])
+							comand_insert = "INSERT INTO users (User, Password) VALUES (%s, %s)"
+							input = (Body[2],Body[3])
 							mycursor.execute(comand_insert,input)
 							mydb.commit()
 				except:
-					comand_insert = "INSERT INTO users (user, password) VALUES (%s, %s)"
-					input = (body["newuserinfo"]["user"],body["newuserinfo"]["password"])
+					comand_insert = "INSERT INTO users (User, Password) VALUES (%s, %s)"
+					input = (Body[2],Body[3])
 					mycursor.execute(comand_insert,input)
 					mydb.commit()
 			else:
-				resposta = {"boo":False}
+				resposta = "False"
 	except:
-		resposta = {"boo":False}
+		resposta = "False"
 
 	ch.basic_publish(exchange='',routing_key=properties.reply_to,properties=pika.BasicProperties(correlation_id = \
 														properties.correlation_id),body=resposta)

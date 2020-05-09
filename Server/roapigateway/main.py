@@ -41,13 +41,13 @@ def login():
 			return "Login Negado"
 
 	elif request.method == 'POST':
-		User = {"user": request.args.get('user'), "password": request.args.get('password')}
-		NewUser = {"user": request.args.get('newuser'), "password": request.args.get('newpassword')}
+		User = request.args.get('user') + "!@!" + request.args.get('password')
+		NewUser = request.args.get('newuser') + "!@!" + request.args.get('newpassword')
 		mensagem = Mensagem(queue="newlogin")
-		response = mensagem.call(mensagem={"userinfo":User, "newuserinfo":NewUser})
-		if response["boo"] == True:
+		response = mensagem.call(mensagem=User+"!@!"+NewUser)
+		if response == "True":
 			return "Novo usuario registrado com sucesso"
-		elif response["boo"] == False:
+		elif response == "False":
 			return "Erro ao registrar novo usuario"
 
 @app.route('/QS2BP7G39nzhdu4suPdy8cGkPVymvxzr/obras/', methods = ['POST', 'GET'])
