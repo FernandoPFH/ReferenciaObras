@@ -25,12 +25,6 @@ def on_request(ch, method, properties, body):
 	Body = body.decode("utf-8").split("!@!")
 	user = (Body[0],)
 
-	mycursor.execute(comand, user)
-	myresult = mycursor.fetchall()
-	
-	if linha[1] == Body[1]:
-		resposta = "True!@!QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"
-
 	try:
 		mycursor.execute(comand, user)
 		myresult = mycursor.fetchall()
