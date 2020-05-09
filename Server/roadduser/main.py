@@ -27,6 +27,8 @@ def on_request(ch, method, properties, body):
 	comand = "SELECT * FROM Users WHERE User =%s"
 	user = (Body[0],)
 
+	resposta ="False"
+
 	try:
 		mycursor.execute(comand, user)
 		myresult = mycursor.fetchall()
