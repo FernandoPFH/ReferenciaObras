@@ -22,6 +22,8 @@ services:
       MYSQL_USER: fernando
       MYSQL_PASSWORD: fernando
       MYSQL_DATABASE: data.db
+      labels:
+        NAME: "mysql-server"
     volumes:
       - "./Database:/var/lib/mysql"
 
