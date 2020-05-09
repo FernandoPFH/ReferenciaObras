@@ -32,7 +32,7 @@ def on_request(ch, method, properties, body):
 		answer = ""
 
 		for linha in myresult:
-			answer += "!!@!!".join(linha) + "!!!@!!!"
+			answer += "!!@!!".join(str(linha)) + "!!!@!!!"
 
 		resposta = "True" + "!@!" + answer
 	#except:
