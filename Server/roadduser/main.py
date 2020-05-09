@@ -45,14 +45,14 @@ def on_request(ch, method, properties, body):
 							break
 						else:
 							comand_insert = "INSERT INTO Users (User, Password) VALUES (%s, %s)"
-							input = (Body[2],Body[3])
-							mycursor.execute(comand_insert,input)
+							input_ = (Body[2],Body[3])
+							mycursor.execute(comand_insert,input_)
 							mydb.commit()
 							resposta = "True"
 				except:
 					comand_insert = "INSERT INTO Users (User, Password) VALUES (%s, %s)"
-					input = (Body[2],Body[3])
-					mycursor.execute(comand_insert,input)
+					input_ = (Body[2],Body[3])
+					mycursor.execute(comand_insert,input_)
 					mydb.commit()
 					resposta = "True"
 			else:
