@@ -35,7 +35,7 @@ def on_request(ch, method, properties, body):
 			try:
 				answer += "!!@!!".join(linha) + "!!!@!!!"
 			except:
-				answer += linha + "!!!@!!!"
+				answer += str(linha) + "!!!@!!!"
 
 		resposta = "True" + "!@!" + answer
 	#except:
