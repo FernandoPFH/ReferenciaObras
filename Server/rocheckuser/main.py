@@ -22,8 +22,8 @@ def on_request(ch, method, properties, body):
 
 	mycursor = mydb.cursor()
 	comand = "SELECT * FROM Users WHERE User =%s"
-	Body = body.split("!@!")
-	user = (Body[0].decode("utf-8"),)
+	Body = body.decode("utf-8").split("!@!")
+	user = (Body[0],)
 
 	mycursor.execute(comand, user)
 	myresult = mycursor.fetchall()
@@ -31,7 +31,7 @@ def on_request(ch, method, properties, body):
 	print(myresult)
 
 	for linha in myresult:
-			if linha[1] == Body[1].decode("utf-8"):
+			if linha[1].decode("utf-8") == Body[1]:
 				resposta = "True!@!QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"
 
 	try:
