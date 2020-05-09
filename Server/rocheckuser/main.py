@@ -20,18 +20,17 @@ def on_request(ch, method, properties, body):
 		except:
 			time.sleep(5)
 
-	print(body)
-
 	mycursor = mydb.cursor()
 	comand = "SELECT * FROM 'Users' WHERE 'User' =%s"
-	user = (body["user"],)
+	Body = body.split("!@!")
+	user = (Body[0],)
 
 	try:
 		mycursor.execute(comand, user)
 		myresult = mycursor.fetchall()
 
 		for linha in myresult:
-			if linha[2] == body["password"]:
+			if linha[2] == Body[1]:
 				resposta = {"boo": True, "code":"QS2BP7G39nzhdu4suPdy8cGkPVymvxzr"}
 				break
 			else:

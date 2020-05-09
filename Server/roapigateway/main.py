@@ -32,9 +32,9 @@ def main_page():
 @app.route('/login/',methods = ['POST', 'GET'])
 def login():
 	if request.method == 'GET':
-		User = {"user": request.args.get('user'), "password": request.args.get('password')}
+		User = request.args.get('user') + "!@!" + request.args.get('password')
 		mensagem = Mensagem(queue="trylogin")
-		response = mensagem.call(mensagem=User['user'])
+		response = mensagem.call(mensagem=User)
 		if response["boo"] == True:
 			#return response["code"]
 			return "Login bem sucedido"
