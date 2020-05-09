@@ -33,9 +33,12 @@ def on_request(ch, method, properties, body):
 
 		for linha in myresult:
 			try:
-				answer += "!!@!!".join(linha) + "!!!@!!!"
+				answer += "!!@!!".join(linha)
 			except:
-				answer += str(linha) + "!!!@!!!"
+				answer += str(linha)
+			
+			if myresult.index(linha) != len(myresult) - 1:
+				answer += "!!!@!!!"
 
 		resposta = "True" + "!@!" + answer
 	#except:
