@@ -45,7 +45,7 @@ def on_request(ch, method, properties, body):
 			if myresult.index(linha) != len(myresult) - 1:
 				answer += "!!!@!!!"
 
-		reposta = "True"+ "!@!" +answer
+		resposta = "True"+ "!@!" +answer
 	#except:
 	#	resposta = "False"
 
