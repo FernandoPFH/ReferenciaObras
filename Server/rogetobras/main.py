@@ -34,7 +34,7 @@ def on_request(ch, method, properties, body):
 		for linha in myresult:
 			answer += "!!@!!".join(linha) + "!!!@!!!"
 
-		reposta = "True" + "!@!" + myresult
+		reposta = "True" + "!@!" + answer
 	#except:
 	#	resposta = "False"
 
