@@ -90,12 +90,12 @@ def referencia():
 			return "Erro ao tentar acessar a referencia"
 
 	elif request.method == 'POST':
-		dados = {"referencia":json.loads(request.args.get('referencia'))}
+		dados = request.args.get('referencia')
 		mensagem = Mensagem(queue="setreferencia")
-		response = mensagem.call(mensagem=dados)
-		if response["boo"] == True:
+		response = mensagem.call(mensagem=dados).split("!@!")
+		if response[0] == True:
 			return "Referencia mudada com sucesso"
-		elif response["boo"] == False:
+		elif response[0] == False:
 			return "Erro ao tentar mudar referencia"
 
 if __name__ == '__main__':
