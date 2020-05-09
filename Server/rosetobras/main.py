@@ -49,8 +49,11 @@ def on_request(ch, method, properties, body):
 	elif Uso == "mudar":
 		try:
 			mycursor = mydb.cursor()
-			comand = "UPDATE Obras SET (Nome, Info) = (%s,%s) WHERE id = %i"
-			val = (Obra["Nome"],json.dumps(Obra["Info"]),Obra["id"])
+			comand = "UPDATE Obras SET Nome = %s WHERE id = %i"
+			val = (Obra["Nome"],Obra["id"])
+			mycursor.execute(comand,val)
+			comand = "UPDATE Obras SET Info = %s WHERE id = %i"
+			val = (json.dumps(Obra["Info"]),Obra["id"])
 			mycursor.execute(comand,val)
 			mydb.commit()
 			resposta = "True"+ "!@!" +"mudar" 
