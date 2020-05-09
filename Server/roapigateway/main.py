@@ -24,6 +24,10 @@ class Mensagem:
 			self.connection.process_data_events()
 		return self.response
 
+@app.route('/',methods = ['POST'])
+def main_page():
+	return 'Hello!!!'
+
 @app.route('/login/',methods = ['POST', 'GET'])
 def login():
 	if request.method == 'GET':
