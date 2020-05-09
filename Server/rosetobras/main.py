@@ -29,7 +29,7 @@ def on_request(ch, method, properties, body):
 	if Uso == "remover":
 		try:
 			mycursor = mydb.cursor()
-			comand = "DELETE FROM Obras WHERE id = %i"
+			comand = "DELETE FROM Obras WHERE id = %s"
 			val = (Obra["id"],)
 			mycursor.execute(comand,val)
 			mydb.commit()
@@ -49,10 +49,10 @@ def on_request(ch, method, properties, body):
 	elif Uso == "mudar":
 		try:
 			mycursor = mydb.cursor()
-			comand = "UPDATE Obras SET Nome = %s WHERE id = %i"
+			comand = "UPDATE Obras SET Nome = %s WHERE id = %s"
 			val = (Obra["Nome"],Obra["id"])
 			mycursor.execute(comand,val)
-			comand = "UPDATE Obras SET Info = %s WHERE id = %i"
+			comand = "UPDATE Obras SET Info = %s WHERE id = %s"
 			val = (json.dumps(Obra["Info"]),Obra["id"])
 			mycursor.execute(comand,val)
 			mydb.commit()
