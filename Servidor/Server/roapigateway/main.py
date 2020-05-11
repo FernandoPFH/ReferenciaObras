@@ -84,6 +84,7 @@ def referencia():
 	if request.method == 'GET':
 		mensagem = Mensagem(queue="getreferencia")
 		response = mensagem.call(mensagem="getreferencia").split("!@!")
+		print(response)
 		if response[0] == "True":
 			return response[1]
 		elif response[0] == "False":
