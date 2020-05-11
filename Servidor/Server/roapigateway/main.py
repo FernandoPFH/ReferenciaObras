@@ -54,7 +54,7 @@ def login():
 def obras():
 	if request.method == 'GET':
 		mensagem = Mensagem(queue="getobras")
-		response = mensagem.call(mensagem="getobras").split("!@!")
+		response = mensagem.call(mensagem="getobras").split(" !@! ")
 		if response[0] == "True":
 			return response[1]
 		elif response[0] == "False":
@@ -83,7 +83,7 @@ def obras():
 def referencia():
 	if request.method == 'GET':
 		mensagem = Mensagem(queue="getreferencia")
-		response = mensagem.call(mensagem="getreferencia").split("!@!")
+		response = mensagem.call(mensagem="getreferencia").split(" !@! ")
 		for info in response:
 			print(info)
 		if response[0] == "True":
