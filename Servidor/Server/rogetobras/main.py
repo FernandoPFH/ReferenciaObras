@@ -35,7 +35,7 @@ def on_request(ch, method, properties, body):
 				answer += " !!@!! ".join(linha)
 			except:
 				answer += str(linha)
-			
+
 			if myresult.index(linha) != len(myresult) - 1:
 				answer += " !!!@!!! "
 
