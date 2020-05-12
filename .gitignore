@@ -1,2 +1,3 @@
-./App/__pycache__/
-./App/.data/
+/App/__pycache__/
+/App/.data/
+/App/test.py
