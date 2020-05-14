@@ -30,7 +30,7 @@ services:
       - 8080:8080
 
   roapigateway:
-    build: ./Server/roapigateway/
+    image: fernandopfh/roapigateway:teste
     depends_on:
       - rabbitmq-server
     tty: true
@@ -38,42 +38,42 @@ services:
       - "5000:5000"
 
   roadduser:
-    build: ./Server/roadduser/
+    image: fernandopfh/roadduser:teste
     depends_on:
       - rabbitmq-server
       - db
     tty: true
 
   rocheckuser:
-    build: ./Server/rocheckuser
+    image: fernandopfh/rocheckuser:teste
     depends_on:
       - rabbitmq-server
       - db
     tty: true
       
   rosetobras:
-    build: ./Server/rosetobras
+    image: fernandopfh/rosetobras:teste
     depends_on:
       - rabbitmq-server
       - db
     tty: true
 
   rogetobras:
-    build: ./Server/rogetobras
+    image: fernandopfh/rogetobras:teste
     depends_on:
       - rabbitmq-server
       - db
     tty: true
       
   rosetreferencia:
-    build: ./Server/rosetreferencia
+    image: fernandopfh/rosetreferencia:teste
     depends_on:
       - rabbitmq-server
       - db
     tty: true
 
   rogetreferencia:
-    build: ./Server/rogetreferencia
+    image: fernandopfh/rogetreferencia:teste
     depends_on:
       - rabbitmq-server
       - db
